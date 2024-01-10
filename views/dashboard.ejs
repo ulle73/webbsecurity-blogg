@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="welcome-header">
+      <h1>Welcome to My Blog, <%= user.username %>!</h1>
+    </div>
+
+    <div class="navigation">
+
+      <a class="newpost" href="/newpost">Create Post</a>
+      <a class="logout" href="/logout">Logout</a>
+      
+    </div>
+
+    <div class="post-section">
+
+      <% if (posts.length > 0) { %>
+        <% posts.sort((a, b) => b.createdAt - a.createdAt).forEach(post => { %>
+          <div class="post">
+            <h2><%= post.title %></h2>
+            <p class="post-content"><%= post.content %></p>
+            <p class="signature">Sign: <%= post.signature %></p>
+            <p class="timestamp">Date: <%= post.createdAt.toLocaleString() %></p>
+            
+          
+            <form action="/deletepost/<%= post._id %>" method="POST" class="delete-form">
+              <button type="submit" class="delete-button">Delete</button>
+            </form>
+          </div>
+        <% }) %>
+      <% } else { %>
+        <p>No posts yet.</p>
+      <% } %>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>&copy; 2024 My Blog.</p>
+  </footer>
+</body>
+</html>

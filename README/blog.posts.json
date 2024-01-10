@@ -1,0 +1,75 @@
+[{
+  "_id": {
+    "$oid": "659de085a718c56a7c32db9a"
+  },
+  "title": "kristians första inlägg",
+  "content": "tja, jag heter kristian",
+  "userId": {
+    "$oid": "659ddebfb8a9fdff7358e783"
+  },
+  "signature": "kristian",
+  "createdAt": {
+    "$date": "2024-01-10T00:10:45.424Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "659de43f7b3339bc47ef09b9"
+  },
+  "title": "inlägg nr2",
+  "content": "inlägg nr2",
+  "userId": {
+    "$oid": "659ddebfb8a9fdff7358e783"
+  },
+  "signature": "kristian",
+  "createdAt": {
+    "$date": "2024-01-10T00:26:39.319Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "659de6ca7b3339bc47ef09fa"
+  },
+  "title": "inlägg nr3",
+  "content": "detta är ett långt inlägg. detta är ett långt inlägg.  detta är ett långt inlägg. detta är ett långt inlägg. detta är ett långt inlägg. detta är ett långt inlägg. detta är ett långt inlägg. detta är ett långt inlägg. detta är ett långt inlägg. ",
+  "userId": {
+    "$oid": "659ddebfb8a9fdff7358e783"
+  },
+  "signature": "kristian",
+  "createdAt": {
+    "$date": "2024-01-10T00:37:30.732Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "659de96d7b3339bc47ef0a52"
+  },
+  "title": "jonas första inlägg",
+  "content": "detta är mitt första inlägg",
+  "userId": {
+    "$oid": "659de095a718c56a7c32db9f"
+  },
+  "signature": "jonas",
+  "createdAt": {
+    "$date": "2024-01-10T00:48:45.708Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "659de98c7b3339bc47ef0a57"
+  },
+  "title": "se andras inlägg?",
+  "content": "nej jag vill inte se andras inlägg. nej jag vill inte se andras inlägg. nej jag vill inte se andras inlägg. nej jag vill inte se andras inlägg. ",
+  "userId": {
+    "$oid": "659de095a718c56a7c32db9f"
+  },
+  "signature": "jonas",
+  "createdAt": {
+    "$date": "2024-01-10T00:49:16.756Z"
+  },
+  "__v": 0
+}]

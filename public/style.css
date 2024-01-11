@@ -4,12 +4,23 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+   
   }
   
   .welcome-header {
     text-align: center;
     margin-bottom: 20px;
+    display:flex;
+   
   }
+
+  .userName{
+    color:#3498db;
+   }
+
+  .rydqvist{
+    color:#3498db
+   }
   
   .welcome-header h1 {
     font-size: 24px;
@@ -138,7 +149,8 @@ body {
   .logout, 
   .newpost,
   .already-user {
-    margin: 10px
+    margin: 10px;
+    margin-top: 10px;
   }
 
   .delete-button,  button, .reg-button {
@@ -151,6 +163,7 @@ body {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.12);
     transition: background-color 0.3s ease;
     margin-top: 10px;
+    margin-bottom: 10px;
   }
   
   .delete-button:hover, button:hover, .reg-button:hover {
@@ -195,5 +208,3 @@ body {
    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   
   }
-
- 

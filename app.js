@@ -3,6 +3,9 @@ const session = require('express-session')
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 const bodyParser = require('body-parser')
+const dotenv = require('dotenv')
+
+dotenv.config()
 
 const app = express()
 const PORT =  3000
@@ -15,10 +18,10 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 
 app.use(session({
-  secret: 'JensenEducationSecretKey', 
+  secret: process.env.SESSION_SECRET, 
   resave: false,
   saveUninitialized: true,
-  cookie: { maxAge: 1000 * 60 * 60 },
+  cookie: { maxAge: 1000 * 60 * 15 },
 }))
 
 // MongoDB server

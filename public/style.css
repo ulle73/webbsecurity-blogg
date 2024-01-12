@@ -221,15 +221,18 @@ body {
  
 
 
-  body.dark-mode, .dark-mode-container{
-    background-color: rgb(59, 59, 59);
+  /* body.dark-mode, .dark-mode-container{
+    /* background-color: rgb(59, 59, 59);  */
     color: rgb(255, 255, 255);
-  }
+  } */
 
   .dark-mode-container{
+
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   }
 
+ 
+  
   
 
   .button-container {
@@ -239,3 +242,27 @@ body {
     justify-self: flex-end;
     margin-top: -10px;
   }
+
+  .dark-mode-container,
+.dark-mode {
+  transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out, opacity 0.5s linear !important;
+}
+
+body.dark-mode, 
+.dark-mode-container {
+  background-color: rgb(59, 59, 59) !important;
+  color: rgb(255, 255, 255) !important;
+}
+
+.dark-mode-container {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3) !important;
+}
+
+
+
+ button {
+  transition: background-color black 0.5s ease-in-out !important;
+}
+
+
+  

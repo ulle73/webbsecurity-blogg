@@ -17,7 +17,7 @@
 <body>
   <div class="container">
     <div class="button-container">
-      <button id="toggleButton" onclick="darkMode()">Toggle Color Mode</button>
+      <button id="toggleButton" onclick="darkMode()">Change Color Theme</button>
       </div>
     <div class="welcome-header">
       
@@ -75,12 +75,6 @@ function darkMode() {
   // Spara temainställningen i localstorage
   const isDarkMode = element.classList.contains('dark-mode' || 'dark-mode-container');
   localStorage.setItem('darkMode', isDarkMode.toString());
-
-  if (isDarkMode) {
-    toggleButton.textContent = 'Toggle Color Mode';
-  } else {
-    toggleButton.textContent = 'Toggle Color Mode';
-  }
 }
 
 // Anropa setTheme vid sidans laddning för att sätta temat

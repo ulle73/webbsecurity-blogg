@@ -235,7 +235,7 @@ body {
 
   .button-container {
     display: flex;
-    margin-bottom: -20px; /* Justera efter behov */
+    margin-bottom: -20px; 
     align-self: flex-end;
     justify-self: flex-end;
     margin-top: -10px;

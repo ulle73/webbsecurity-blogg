@@ -5,9 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard</title>
   <link rel="stylesheet" href="/style.css">
+  <!-- <style>
+    body.dark-mode {
+      background-color: black;
+      color: white;
+    }
+  </style> -->
 </head>
 <body>
   <div class="container">
+    <div class="button-container">
+      <button id="toggleButton" onclick="darkMode()">Toggle Color Mode</button>
+      </div>
     <div class="welcome-header">
      <h2>Welcome&nbsp;</h2><h2 class="userName"><%= user.username.toUpperCase() %></h2>
      </div>
@@ -44,5 +53,38 @@
   <footer class="footer">
     <p>&copy; 2024 Rydqvist Blog.</p>
   </footer>
+
+
+  <script>
+    // Funktion för att sätta temat baserat på localstorage
+function setTheme() {
+  const isDarkMode = localStorage.getItem('darkMode') === 'true';
+  const bodyElement = document.body;
+  const containerElement = document.querySelector('.container');
+
+  if (isDarkMode) {
+    bodyElement.classList.add('dark-mode');
+    containerElement.classList.add('dark-mode-container');
+  }
+}
+
+// Funktion för att byta temat
+function darkMode() {
+  var element = document.body;
+  var containerElement = document.querySelector('.container');
+
+  element.classList.toggle("dark-mode");
+  containerElement.classList.toggle("dark-mode-container");
+
+  // Spara temainställningen i localstorage
+  const isDarkMode = element.classList.contains('dark-mode' || 'dark-mode-container');
+  localStorage.setItem('darkMode', isDarkMode.toString());
+}
+
+// Anropa setTheme vid sidans laddning för att sätta temat
+document.addEventListener('DOMContentLoaded', setTheme);
+
+  </script>
+  
 </body>
 </html>

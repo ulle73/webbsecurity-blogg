@@ -2,16 +2,18 @@ const express = require('express')
 const session = require('express-session')
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
+const helmet = require('helmet')
 const bodyParser = require('body-parser')
 const dotenv = require('dotenv')
 
 dotenv.config()
 
+
 const app = express()
 const PORT =  3000
 
 app.use(express.static('public'))
-
+app.use(helmet())
 app.set('view engine', 'ejs')
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -21,7 +23,10 @@ app.use(session({
   secret: process.env.SESSION_SECRET, 
   resave: false,
   saveUninitialized: true,
-  cookie: { maxAge: 1000 * 60 * 15 },
+  cookie: { maxAge: 1000 * 60 * 15,  
+    secure: true,
+    httpOnly: true, 
+  },
 }))
 
 // MongoDB server
@@ -65,9 +70,10 @@ const isLoggedIn = (req, res, next) => {
 
 
 
-// Routes
-app.get('/', (req, res) => {
-  res.redirect('/login')
+// Routes//
+
+app.get('/', isLoggedIn ,(req, res) => {
+  res.redirect('/dashboard')
 })
 
 app.get('/login', (req, res) => {

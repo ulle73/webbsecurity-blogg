@@ -5,31 +5,41 @@ const bcrypt = require('bcrypt')
 const helmet = require('helmet')
 const bodyParser = require('body-parser')
 const dotenv = require('dotenv')
+const mongoSanitize = require('express-mongo-sanitize')
+const rateLimit = require('express-rate-limit')
 
 dotenv.config()
 
 
 const app = express()
-const PORT =  3000
+const PORT = 3000
+const limiter = rateLimit({
+  windowMs: 1000 * 60,
+  max: 20,
+});
 
+
+// MIDDLEWARES //
 app.use(express.static('public'))
 app.set('view engine', 'ejs')
-app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: true }))
-//app.use(helmet()) - När jag laddar helmet slutar min change color theme att fungera
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+  })
+);
+app.use(mongoSanitize())
+app.use('/', limiter)
 
 
 app.use(session({
-  secret: process.env.SESSION_SECRET, 
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
-  cookie: { maxAge: 1000 * 60 * 15,  
-   
-    // httpOnly: true, 
-  },
+  cookie: { maxAge: 1000 * 60 * 15 },
 }))
 
-// MongoDB server
+// MongoDB server //
 mongoose.connect('mongodb://localhost/blog', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -38,10 +48,10 @@ mongoose.connect('mongodb://localhost/blog', {
 const db = mongoose.connection
 
 db.once('connection', (stream) => {
-  console.log('Working!');
-});
+  console.log('Working!')
+})
 
-// Schema för skapa användare + inlägg
+// Schema för skapa användare + inlägg //
 const userSchema = new mongoose.Schema({
   username: String,
   password: String,
@@ -58,7 +68,7 @@ const postSchema = new mongoose.Schema({
 const User = mongoose.model('User', userSchema)
 const Post = mongoose.model('Post', postSchema)
 
-// Dörrvakt för inlogg
+// Dörrvakt för inlogg //
 const isLoggedIn = (req, res, next) => {
   if (req.session && req.session.userId) {
     return next()
@@ -70,9 +80,9 @@ const isLoggedIn = (req, res, next) => {
 
 
 
-// Routes//
+// Routes //
 
-app.get('/', isLoggedIn ,async (req, res) => {
+app.get('/', isLoggedIn, async (req, res) => {
   res.redirect('/dashboard')
 })
 
@@ -84,11 +94,11 @@ app.post('/login', async (req, res) => {
   const { username, password } = req.body
   const user = await User.findOne({ username })
 
-  // Kolla att inmatat lösen === bcrypt 
+  // Kolla att inmatat lösen === bcrypt //
   if (user && bcrypt.compareSync(password, user.password)) {
     req.session.userId = user.id
 
-    //Extra säkerhet för att skydda mot bruteforce
+    // Extra säkerhet för att skydda mot bruteforce //
     setTimeout(() => {
       res.redirect('/dashboard')
     }, 2000)
@@ -105,27 +115,29 @@ app.get('/register', (req, res) => {
 app.post('/register', async (req, res) => {
   const { username, password } = req.body
 
-  // Dörrvakt för lika användarnamn
+  // Dörrvakt för lika användarnamn //
   const existingUser = await User.findOne({ username })
 
   if (existingUser) {
-    setTimeout(()=>{
-      res.render('register', { message: 'Username already taken.' })},2000)
+    setTimeout(() => {
+      res.render('register', { message: 'Username already taken.' })
+    }, 2000)
   } else {
 
-    // Hasha med random salt
+    // Hasha med random salt //
     const startSalt = 10
     const salt = await bcrypt.genSalt(startSalt)
     const hashedPassword = await bcrypt.hash(password, salt)
 
-    // Spara användare
+    // Spara användare //
     const newUser = new User({ username, password: hashedPassword })
     await newUser.save()
 
-    setTimeout(()=>{
-      res.render('login', {message: 'Registration ok'})},2000)
+    setTimeout(() => {
+      res.render('login', { message: 'Registration ok' })
+    }, 2000)
   }
-});
+})
 
 
 
@@ -164,12 +176,13 @@ app.post('/newpost', isLoggedIn, async (req, res) => {
         signature: user.username,
       })
 
-      
-        await post.save()
 
-      //Extra skydd mot överbelastning
-      setTimeout(async ()=>{
-        res.redirect('/dashboard')},2000)
+      await post.save()
+
+      // Extra skydd mot överbelastning //
+      setTimeout(async () => {
+        res.redirect('/dashboard')
+      }, 2000)
     } else {
       res.status(404).send()
     }
@@ -196,7 +209,7 @@ app.post('/deletepost/:postId', isLoggedIn, async (req, res) => {
   const postId = req.params.postId
 
   try {
-    
+
     await Post.findOneAndDelete({ _id: postId, userId: req.session.userId })
 
     res.redirect('/dashboard')
@@ -205,6 +218,8 @@ app.post('/deletepost/:postId', isLoggedIn, async (req, res) => {
     res.status(500).send()
   }
 })
+
+/////////////////////////////////////////
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`)

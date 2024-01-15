@@ -10,5 +10,8 @@ password: kristian123
 username: jonas
 password: jonas123
 
+username: adam
+password: adam123
+
 
 

@@ -13,4 +13,20 @@
   "username": "jonas",
   "password": "$2b$10$Vzi7TDin7XHDL.VSGEEWPeXK2jYi9DkX3TiKMJAs9ZdHxrMev87w2",
   "__v": 0
+},
+{
+  "_id": {
+    "$oid": "659e864cb2e4fce40c426afc"
+  },
+  "username": "irene",
+  "password": "$2b$10$G.CgP9A6IeLWCOTQyzofzOIMe8PsfABGhDrSuNkPfTzufVC7zbS2i",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65a508f2ff25f2fb92867426"
+  },
+  "username": "adam",
+  "password": "$2b$10$KfLbI21LcCTrw9ewShhOtOEhE3b4YG15vTujYi/Zhrl1TU6mxPkJW",
+  "__v": 0
 }]

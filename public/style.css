@@ -51,6 +51,9 @@
     border: 1px solid #ccc;
     border-radius: 3px;
     box-sizing: border-box;
+    caret-color: #3498db;
+    
+ 
   }
   
   .login-button {
@@ -116,6 +119,8 @@ body {
   label {
     margin-bottom: 8px;
     display: block;
+    caret-color: #3498db;
+  
   }
   
   input,
@@ -126,6 +131,7 @@ body {
     border: 1px solid #ccc;
     border-radius: 3px;
     box-sizing: border-box;
+    caret-color: #3498db;
   }
   
   .create-post-button {
